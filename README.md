@@ -20,7 +20,7 @@ Este site é amplamente utilizado para simulações de automações de testes. E
 - [x] **3 casos de testes desenvolvidos**
 - [x] **Pelo menos 1 teste negativo**
 - [x] **Presença de funções reutilizáveis nos testes**
-- [x] **Geração de relatório final com mochawesome (pode ser configurado)**
+- [x] **Geração de relatório final com mochawesome (caminho: cypress/reports/mochawesome.html)**
 - [x] **Não utilização de sites da lista de exceções**
 
 ---
