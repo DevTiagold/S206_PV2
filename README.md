@@ -8,8 +8,8 @@ Este repositório contém as duas partes da Prova de Qualidade de Software, util
 
 O repositório está dividido em duas *branches*:
 
-- [`Primeira_Parte`](https://github.com/SEU_USUARIO/S206_PV2/tree/Primeira_Parte): testes de **API** com o **Postman**.
-- [`Segunda_Parte`](https://github.com/SEU_USUARIO/S206_PV2/tree/Segunda_Parte): testes de **UI** com o **Cypress**.
+- [`Primeira_Parte`](https://github.com/DevTiagold/S206_PV2/blob/Primeira_Parte/README.md): testes de **API** com o **Postman**.
+- [`Segunda_Parte`](https://github.com/DevTiagold/S206_PV2/blob/Segunda_Parte/README.md): testes de **UI** com o **Cypress**.
 
 Use o botão de troca de branch no GitHub para navegar entre as duas partes.
 
