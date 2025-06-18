@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "1d9d2051-bc44-4de0-9103-c5c445cf680a",
+		"name": "FakeStoreAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45966681",
+		"_collection_link": "https://tiago-5171012.postman.co/workspace/Tiago's-Workspace~86018d11-0d63-4cb0-8895-667fa812ea22/collection/45966681-1d9d2051-bc44-4de0-9103-c5c445cf680a?action=share&source=collection_link&creator=45966681"
+	},
+	"item": [
+		{
+			"name": "Requisitando produtos(pode acontecer falha no teste de tempo de resposta)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200 OK\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta < 1s\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Resposta é um array\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cada produto contém campos esperados\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    res.forEach(produto => {\r",
+							"        pm.expect(produto).to.include.all.keys(\"id\", \"title\", \"price\", \"description\", \"category\", \"image\");\r",
+							"\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fakestoreapi.com/products",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionando produto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200 OK\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Produto criado com sucesso\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res.title).to.eql(\"Camiseta Azul Royal\");\r",
+							"    pm.expect(res.category).to.eql(\"clothing\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ID do novo produto gerado\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res).to.have.property(\"id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Resposta em JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta < 1s\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Camiseta Azul Royal\",\r\n  \"price\": 49.90,\r\n  \"description\": \"Camiseta azul royal tradicional para sublimação.\",\r\n  \"image\": \"https://loja.comerciomix.com.br/media/catalog/product/cache/c96aa0f6886bbc8798bea1aeeb42c61f/c/a/camiseta-azul-royal-para-sublima_o-tradicional_1.jpg\",\r\n  \"category\": \"clothing\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/products",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Requisitando um produto (Falha em alguns testes intencionalmente)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200 OK\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta < 1s\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Resposta contém dados do produto\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res).to.have.include.keys(\"id\", \"title\", \"price\", \"description\", \"category\", \"image\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"O ID retornado é o mesmo requisitado\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res.id).to.eql(100); // ajuste esse valor conforme o ID requisitado\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tipo do campo price é numérico\", () => {\r",
+							"    const res = pm.response.json();\r",
+							"    pm.expect(res.price).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fakestoreapi.com/products/100",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
